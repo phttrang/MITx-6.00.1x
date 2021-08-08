@@ -50,16 +50,18 @@ monthlyInterestRate = annualInterestRate/12
 lower = init_balance/12
 upper = (init_balance * (1 + monthlyInterestRate)**12)/12.0
 epsilon = 0.03
+minPay = (high + low)/2.0
 
-while abs(balance) > epsilon:
-    monthlyPaymentRate = (upper + lower)/2
-    balance = init_balance
-    for i in range(1,13):
-        balance = balance - monthlyPaymentRate + ((balance - monthlyPaymentRate) * monthlyInterestRate)
-    if balance > epsilon:
-        lower = monthlyPaymentRate
-    elif balance < -epsilon:
-        upper = monthlyPaymentRate
+def calculate(month, balance, minPay, monthlyInterestRate):
+    for month in range(1,13):
+        unpaidBalance = balance - minPay
+        balance = unpaidBalance + (monthlyInterestRate * unpaidBalance)
+    return balance   
+while abs(balance) >= epsilon:
+    balance = initBalance
+    balance = calculate(month, balance, minPay, monthlyInterestRate)
+    if balance > 0:
+        lower = minPay
     else:
-        break
-print('Lowest Payment:', round(monthlyPaymentRate, 2))
+        higher = minPay
+print('Lowest Payment: ', round(minPay,2))
