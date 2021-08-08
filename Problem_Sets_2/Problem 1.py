@@ -28,6 +28,6 @@
 
 
 # Paste your code into this box
-for i in range(12):
+for i in range(1,13):
     balance = balance - (balance * monthlyPaymentRate) + ((balance - (balance * monthlyPaymentRate)) * (annualInterestRate/12))
 print("Remaining balance:", round(balance, 2))
