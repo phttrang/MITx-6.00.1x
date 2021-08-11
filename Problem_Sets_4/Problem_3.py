@@ -25,7 +25,7 @@ def isValidWord(word, hand, wordList):
     wordList: list of lowercase strings
     """
     # TO DO ... <-- Remove this comment when you code this function
-    temp = hand[:]
+    temp = hand.copy()
     
     if word in wordList:
       word_check = True
